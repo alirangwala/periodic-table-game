@@ -1,0 +1,53 @@
+table {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for table header */
+table thead {
+    background-color: #ecf0f1;
+    color: #34495e;
+    font-weight: bold;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style the even rows for better readability */
+table tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+
+/* Style invalid row */
+.invalid {
+    color: red;
+    font-weight: bold;
+}
+
+/* Style "SAME", "HIGHER", "LOWER" keywords */
+.status {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-same {
+    color: green;
+}
+
+.status-higher {
+    color: orange;
+}
+
+.status-lower {
+    color: red;
+}

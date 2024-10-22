@@ -1,0 +1,10 @@
+.periodic-table {
+    display: grid;
+    grid-template-columns: repeat(19, 60px); /* 18 columns, adjust the width */
+    grid-template-rows: repeat(10, 60px); /* 10 rows, adjust the width */
+    gap: 2px;
+    justify-content: center;
+    margin: 20px;
+    align-items: center;
+  }
+  

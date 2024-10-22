@@ -1,0 +1,11 @@
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+  }
