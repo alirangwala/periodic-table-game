@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PeriodicTable from '../PeriodicTable/PeriodicTable'
 import Guesses from '../Guesses/Guesses'
 import Modal from '../Modal/Modal'
@@ -23,6 +23,8 @@ const Game = () => {
     const [currentGuess, setCurrentGuess] = useState<string>("")
     const [openWon, setOpenWon] = useState(false);
     const [error, setError] = useState<string | null>(null); 
+
+    const bottomRef = useRef<HTMLDivElement>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
@@ -57,6 +59,11 @@ const Game = () => {
         }
     }, [currentGuess, guessedElements]);
 
+    useEffect(() => {
+        if (bottomRef.current) {
+            bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [guessedElements]);
     return (
         <div>
             <form onSubmit={handleSubmit} >
@@ -74,6 +81,7 @@ const Game = () => {
             <PeriodicTable guessedElements={guessedElements} setInput={setInput}/>
 
             {(guessedElements.length > 0) && <Guesses guessedElements={guessedElements} actualElement={actualElement} />}
+            <div ref={bottomRef} />
             {openWon && <Modal primary_message="You Won!" secondary_message = {elementMap.get(actualElement)["fun_fact"]}  onClose={() => handleModalClose()} />} {/* Conditionally render the modal */}
         </div>
     )
