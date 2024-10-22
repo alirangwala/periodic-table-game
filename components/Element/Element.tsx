@@ -5,7 +5,7 @@ export interface ElementProps {
   number: number;
   symbol: string;
   name: string;
-  setInput: any;
+  setInput: (str: string)=> void;
   guessed: boolean;
 }
 

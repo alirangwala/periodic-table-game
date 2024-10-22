@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import PeriodicTable from '../PeriodicTable/PeriodicTable'
 import Guesses from '../Guesses/Guesses'
 import Modal from '../Modal/Modal'
-import { ElementData ,elements, elementMap } from '@/lib/elements'
+import { elements, elementMap } from '@/lib/elements'
 
 import "./Game.css";
 
@@ -15,7 +15,7 @@ const getTodaysElement = () => {
     const elementOfTheDay = elements[daysSinceEpoch % numberOfElements]["name"].toLowerCase()
     return elementOfTheDay
 }
-const actualElement = "aluminum"
+const actualElement = getTodaysElement()
 
 const Game = () => {
     const [input, setInput] = useState<string>('');
@@ -55,7 +55,7 @@ const Game = () => {
                 setOpenWon(true);
             }
         }
-    }, [currentGuess, actualElement, guessedElements]);
+    }, [currentGuess, guessedElements]);
 
     return (
         <div>
@@ -71,7 +71,7 @@ const Game = () => {
                 </div>
                 {error && <p className="error-message">{error}</p>}
             </form>
-            <PeriodicTable setCurrentGuess={setCurrentGuess} guessedElements={guessedElements} setInput={setInput}/>
+            <PeriodicTable guessedElements={guessedElements} setInput={setInput}/>
 
             {(guessedElements.length > 0) && <Guesses guessedElements={guessedElements} actualElement={actualElement} />}
             {openWon && <Modal primary_message="You Won!" secondary_message = {elementMap.get(actualElement)["fun_fact"]}  onClose={() => handleModalClose()} />} {/* Conditionally render the modal */}

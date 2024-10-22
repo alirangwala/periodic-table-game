@@ -6,16 +6,14 @@ import "./PeriodicTable.css";
 
 
 export interface PeriodicTableProps {
-  setCurrentGuess: (guess: string)=> void;
-  setInput: (str: string)=> void;
   guessedElements: string[]
+  setInput: (str: string)=> void;
 }
 
+const PeriodicTable = ( {guessedElements, setInput}: PeriodicTableProps)=> {
 
-const PeriodicTable = ({setCurrentGuess, guessedElements, setInput}: PeriodicTableProps)=> {
-
-  const mapElements = (elements: any, start: number, end: number) => {
-    return Array.from(elements.values()).slice(start,end).map((el: any, index) => (
+  const mapElements = (elements: Map<string, ElementData>, start: number, end: number) => {
+    return Array.from(elements.values()).slice(start,end).map((el: ElementData, index) => (
       <Element 
         key={index}
         number={el.num}
@@ -28,14 +26,11 @@ const PeriodicTable = ({setCurrentGuess, guessedElements, setInput}: PeriodicTab
   }
   
   const mapGaps = (gap_number: number) => {
-    return Array.apply(null, Array(gap_number)).map((_, index) => (
-        <GapElement key ={index} />
-    ))
+    return [...Array(gap_number)].map((_, index) => (
+      <GapElement key={index} />
+  ));
   }
   
-  // const updatedElements = [...elements]
-
-  console.log(elementMap)
   return (
     <>
     <div className="periodic-table">

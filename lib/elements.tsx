@@ -1200,5 +1200,3 @@ export const elementMap = new Map();
 elements.forEach(element => {
   elementMap.set(element.name.toLowerCase(), element); 
 });
-
-console.log(elementMap)
