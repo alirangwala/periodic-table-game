@@ -9,3 +9,18 @@
     height: 60px;
     background-color: transparent;
   }
+
+  /* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .placeholder {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 768px) {
+    .placeholder {
+        width: 20px;
+        height: 20px;
+    }
+}

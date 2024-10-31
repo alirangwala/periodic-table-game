@@ -9,12 +9,21 @@ import "./Game.css";
 
 
 const getTodaysElement = () => {
-    const millisecondsPerDay = 86400000;
-    const numberOfElements = 118
-    const daysSinceEpoch = Math.floor(Date.now() / millisecondsPerDay);
-    const elementOfTheDay = elements[daysSinceEpoch % numberOfElements]["name"].toLowerCase()
+    const today = new Date();
+    const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    
+    let hash = 0;
+    for (let i = 0; i < dateString.length; i++) {
+      const charCode = dateString.charCodeAt(i);
+      hash = (hash << 5) - hash + charCode;
+      hash |= 0;
+    }
+    const random = (Math.sin(hash) * 10000) % 1;
+
+    const elementOfTheDay = elements[Math.abs(Math.floor(random * 118))]["name"].toLowerCase()
     return elementOfTheDay
-}
+  }
+
 const actualElement = getTodaysElement()
 
 const Game = () => {
@@ -50,6 +59,7 @@ const Game = () => {
         setOpenWon(false)
 
     }
+
     useEffect(() => {
         if (currentGuess !== "" && !guessedElements.includes(currentGuess.toLowerCase())) {
             setGuessedElements(prevGuesses => [...prevGuesses, currentGuess.toLowerCase()]);
@@ -60,7 +70,8 @@ const Game = () => {
     }, [currentGuess, guessedElements]);
 
     useEffect(() => {
-        if (bottomRef.current) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (bottomRef.current && guessedElements.length) {
             bottomRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [guessedElements]);
@@ -71,7 +82,7 @@ const Game = () => {
                     type="text"
                     value={input}
                     onChange={handleChange}
-                    placeholder="Enter an Element Here"
+                    placeholder="Enter or Select an Element"
                 />
                 <div className="buttonWrapper">
                     <button >Enter</button>
@@ -82,7 +93,7 @@ const Game = () => {
 
             {(guessedElements.length > 0) && <Guesses guessedElements={guessedElements} actualElement={actualElement} />}
             <div ref={bottomRef} />
-            {openWon && <Modal primary_message="You Won!" secondary_message = {elementMap.get(actualElement)["fun_fact"]}  onClose={() => handleModalClose()} />} {/* Conditionally render the modal */}
+            {openWon && <Modal primary_message="You Won!" secondary_message = {elementMap.get(actualElement)["fun_fact"]}  onClose={() => handleModalClose()} />}
         </div>
     )
 }

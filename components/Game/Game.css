@@ -55,3 +55,19 @@ form {
   .error-message {
     color: red;
   }
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+        max-width: 90%;
+    }
+    input {
+        font-size: 12px;
+    }
+    button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}

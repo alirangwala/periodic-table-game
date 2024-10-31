@@ -1,6 +1,6 @@
 table {
     width: 100%;
-    max-width: 600px;
+    max-width: 680px;
     margin: 20px auto;
     border-collapse: collapse;
     background-color: #f9f9f9;
@@ -50,4 +50,51 @@ table tr:nth-child(even) {
 
 .status-lower {
     color: red;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    table {
+        max-width: 100%;
+        font-size: 12px;
+    }
+    
+    table thead {
+        display: none;
+    }
+    
+    table, table tr, table td {
+        display: block;
+        width: 100%;
+    }
+    
+    table tr {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #ffffff;
+        margin-bottom: 10px;
+    }
+    
+    table td {
+        display: flex;
+        justify-content: space-between;
+        width: 48%;
+        margin-bottom: 6px;
+        padding: 8px;
+        font-size: 12px;
+        border-bottom: none;
+    }
+    
+    table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #34495e;
+        margin-right: 8px;
+    }
 }

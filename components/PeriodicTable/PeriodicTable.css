@@ -8,3 +8,22 @@
     align-items: center;
   }
   
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .periodic-table {
+        grid-template-columns: repeat(19, 45px);
+        grid-template-rows: repeat(10, 45px);
+        gap: 1px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .periodic-table {
+        grid-template-columns: repeat(19, 20px);
+        grid-template-rows: repeat(10, 20px);
+        gap: 1px;
+        width: 100%;
+    }
+}

@@ -44,3 +44,36 @@
   .mass {
     font-size: 12px;
   }
+
+  /* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .guessed-element, .unguessed-element {
+        width: 45px;
+        height: 45px;
+    }
+    .number {
+        font-size: 10px;
+    }
+    .symbol {
+        font-size: 20px;
+    }
+    .name {
+        font-size: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .guessed-element, .unguessed-element {
+        width: 20px;
+        height: 20px;
+    }
+    .number {
+        font-size: 6px;
+    }
+    .symbol {
+        font-size: 8px;
+    }
+    .name {
+        font-size: 0px;
+    }
+}

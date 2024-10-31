@@ -1,65 +1,71 @@
-import React from 'react'
+import React from 'react';
 import { elementMap } from '@/lib/elements';
 
 export interface GuessProps {
     guessedElement: string;
-    actualElement: string
+    actualElement: string;
 }
 
-const Guess = ({guessedElement, actualElement}: GuessProps) => {
+const Guess = ({ guessedElement, actualElement }: GuessProps) => {
     
-    const findElement = (element:string) => {
-        return elementMap.get(element.toLowerCase())
+    const findElement = (element: string) => {
+        return elementMap.get(element.toLowerCase());
     };
 
-    const compareStrings = (guess: string, actual: string) => {
-        if (guess == actual) {
-            return <td className='status-same'>{guess}</td>
+    const compareStrings = (guess: string, actual: string, label: string) => {
+        if (guess === actual) {
+            return <td data-label={label} className="status-same">{guess}</td>;
         } else {
-            return <td className='status-lower'>{guess}</td>
+            return <td data-label={label} className="status-lower">{guess}</td>;
         }
-    }
-    const compareNumbers = (guess: number, actual: number) => {
-        return guess < actual ? <td className='status-lower'>{guess} &uarr;</td> 
-             : guess > actual ? <td className='status-lower'>{guess} &darr;</td> 
-             : <td className='status-same'>{guess}</td>;
-      };
-      
+    };
 
-      const compareGuessAndActual = (guessed: string, actual: string) => {
+    const compareNumbers = (guess: number, actual: number, label: string) => {
+        return guess < actual ? (
+            <td data-label={label} className="status-lower">{guess} &uarr;</td>
+        ) : guess > actual ? (
+            <td data-label={label} className="status-lower">{guess} &darr;</td>
+        ) : (
+            <td data-label={label} className="status-same">{guess}</td>
+        );
+    };
+
+    const compareGuessAndActual = (guessed: string, actual: string) => {
         const guessedEl = findElement(guessed);
         const actualEl = findElement(actual);
 
         if (!guessedEl || !actualEl) {
             return (
                 <tr>
-                    <td>Invalid Element</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
+                    <td data-label="Element">Invalid Element</td>
+                    {/* <td data-label="Number">N/A</td> */}
+                    <td data-label="Metallic">N/A</td>
+                    <td data-label="Atomic Radius">N/A</td>
+                    <td data-label="Valency">N/A</td>
+                    <td data-label="State at Room Temp.">N/A</td>
+                    <td data-label="Natural or Synthetic">N/A</td>
                 </tr>
             );
         }
 
         return (
             <tr>
-                <td>{guessedEl.name}</td>
-                {compareNumbers(guessedEl.num, actualEl.num)}
-                {compareStrings(guessedEl.metallic, actualEl.metallic)}
-                {compareNumbers(guessedEl.atomic_radius, actualEl.atomic_radius)}
-                {compareNumbers(guessedEl.valency, actualEl.valency)}
-                {compareStrings(guessedEl.state_of_matter, actualEl.state_of_matter)}
-                {compareStrings(guessedEl.natural, actualEl.natural)}
+                <td data-label="Element">{guessedEl.name}</td>
+                {/* {compareNumbers(guessedEl.num, actualEl.num, "Number")} */}
+                {compareStrings(guessedEl.metallic, actualEl.metallic, "Metallic")}
+                {compareNumbers(guessedEl.atomic_radius, actualEl.atomic_radius, "Atomic Radius")}
+                {compareNumbers(guessedEl.valency, actualEl.valency, "Valency")}
+                {compareStrings(guessedEl.state_of_matter, actualEl.state_of_matter, "State at Room Temp.")}
+                {compareStrings(guessedEl.natural, actualEl.natural, "Natural or Synthetic")}
             </tr>
         );
-    
     };
 
     return (
-    <tbody>
-        {compareGuessAndActual(guessedElement, actualElement)}
-    </tbody>
-    )
-}
+        <tbody>
+            {compareGuessAndActual(guessedElement, actualElement)}
+        </tbody>
+    );
+};
 
-export default Guess
+export default Guess;
